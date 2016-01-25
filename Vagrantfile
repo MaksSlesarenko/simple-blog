@@ -15,8 +15,10 @@ Vagrant.configure(2) do |config|
     echo vagrant | sudo -S apt-get install -y nginx
     echo vagrant | sudo -S apt-get install -y php5-cli
     echo vagrant | sudo -S apt-get install -y postgresql
+    echo vagrant | sudo -S apt-get install -y git
+    curl -sS https://getcomposer.org/installer | echo vagrant | sudo -S php -- --install-dir=/usr/local/bin --filename=composer
     echo vagrant | sudo -S curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
     echo vagrant | sudo -S chmod a+x /usr/local/bin/symfony
-    echo vagrant | sudo -S sed -i 's/;date.timezone =/date.timezone = "Europe\/Kiev"/g' /etc/php5/cli/php.ini 
+    echo vagrant | sudo -S sed -i 's/;date.timezone =/date.timezone = "Europe\/Kiev"/g' /etc/php5/cli/php.ini
   SHELL
 end
