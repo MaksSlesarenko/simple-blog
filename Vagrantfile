@@ -5,20 +5,11 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty32"
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "private_network", ip: "192.168.33.11"
-  config.vm.synced_folder "./", "/simple-blog"
+  config.vm.synced_folder "./", "/var/www/blog", create: true, group: "www-data", owner: "www-data"
   config.vm.provider "virtualbox" do |vb|
-    vb.memory = "1024"
+    vb.memory = "512"
   end
-  config.vm.provision "shell", privileged: false, inline: <<-SHELL
-    echo vagrant | sudo -S locale-gen UTF-8
-    echo vagrant | sudo -S apt-get update
-    echo vagrant | sudo -S apt-get install -y nginx
-    echo vagrant | sudo -S apt-get install -y php5-cli
-    echo vagrant | sudo -S apt-get install -y postgresql
-    echo vagrant | sudo -S apt-get install -y git
-    curl -sS https://getcomposer.org/installer | echo vagrant | sudo -S php -- --install-dir=/usr/local/bin --filename=composer
-    echo vagrant | sudo -S curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
-    echo vagrant | sudo -S chmod a+x /usr/local/bin/symfony
-    echo vagrant | sudo -S sed -i 's/;date.timezone =/date.timezone = "Europe\/Kiev"/g' /etc/php5/cli/php.ini
-  SHELL
+  config.vm.provision "shell" do |s|
+    s.path="provision/setup.sh"
+  end
 end
