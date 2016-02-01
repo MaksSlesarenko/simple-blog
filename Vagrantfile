@@ -9,7 +9,7 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "512"
   end
-  config.vm.provision "shell" do |s|
+  config.vm.provision "shell", privileged: false do |s|
     s.path="provision/setup.sh"
   end
 end
