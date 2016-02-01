@@ -2,8 +2,15 @@
 
 echo "Provisioning virtual machine..."
 
-PASSWORD='12345678'
+ROOT_DIR=/home/vagrant/projects/blog
 POSTGRE_VERSION=9.3
+DB_NAME='blog'
+DB_USER='root'
+DB_PORT='5432'
+DB_PASSWORD='12345678'
+DB_DRIVER='pdo_pgsql'
+
+#usermod -a -G www-data vagrant
 
 echo "Repository update..."
 apt-get update > /dev/null
@@ -22,7 +29,7 @@ echo "Installing nginx..."
 apt-get install -y nginx > /dev/null
 
 echo "Configuring nginx"
-cp /var/www/blog/provision/config/nginx_vhost /etc/nginx/sites-available/nginx_vhost > /dev/null
+cp $ROOT_DIR/provision/config/nginx_vhost /etc/nginx/sites-available/nginx_vhost > /dev/null
 ln -s /etc/nginx/sites-available/nginx_vhost /etc/nginx/sites-enabled/
 rm -rf /etc/nginx/sites-available/default
 service nginx restart > /dev/null
@@ -34,8 +41,8 @@ echo "Installing postgresql"
 apt-get install -y postgresql=$POSTGRE_VERSION\* > /dev/null
 
 echo "Configuring postgresql"
-sudo -u postgres psql -c "CREATE ROLE root LOGIN UNENCRYPTED PASSWORD '$PASSWORD' NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
-sudo -u postgres psql -c "CREATE DATABASE blog"
+sudo -u postgres psql -c "CREATE ROLE $DB_USER LOGIN UNENCRYPTED PASSWORD '$DB_PASSWORD' NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
+sudo -u postgres psql -c "CREATE DATABASE $DB_NAME"
 sed -i 's@#listen_addresses@listen_addresses@' /etc/postgresql/$POSTGRE_VERSION/main/postgresql.conf
 
 echo "Installing symfony cli..."
@@ -47,5 +54,15 @@ curl -sS https://getcomposer.org/installer | php > /dev/null
 mv composer.phar /usr/local/bin/composer
 
 echo "Installing composer packages..."
-cd /var/www/blog
+cd $ROOT_DIR
 composer install > /dev/null
+
+echo "Configuring symfony"
+cp $ROOT_DIR/app/config/parameters.yml.dist $ROOT_DIR/app/config/parameters.yml
+
+sed -i "s@database_port:.*@database_port: $DB_PORT@" $ROOT_DIR/app/config/parameters.yml
+sed -i "s@database_name:.*@database_name: $DB_NAME@" $ROOT_DIR/app/config/parameters.yml
+sed -i "s@database_password:.*@database_password: $DB_PASSWORD@" $ROOT_DIR/app/config/parameters.yml
+sed -i "s@database_user:.*@database_user: $DB_USER@" $ROOT_DIR/app/config/parameters.yml
+sed -i 's@pdo_mysql@"%database_driver%"@' $ROOT_DIR/app/config/config.yml
+sed -i "s@parameters:@parameters:\n    database_driver: $DB_DRIVER@" $ROOT_DIR/app/config/parameters.yml

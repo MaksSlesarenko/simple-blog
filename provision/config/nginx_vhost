@@ -1,6 +1,6 @@
 server {
     server_name localhost;
-    root /var/www/blog/web;
+    root /home/vagrant/projects/blog/web;
 
     location / {
         # try to serve file directly, fallback to app.php
