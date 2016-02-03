@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
    /**
     * @ORM\Column(type="string", length=100)
     */
-   protected $name;
+   protected $title;
 
    /**
     * @return int
@@ -31,8 +31,8 @@ use Doctrine\ORM\Mapping as ORM;
    /**
     * @return string
     */
-   public function getName() {
-       return $this->name;
+   public function getTitle() {
+       return $this->title;
    }
 
    /**
@@ -44,10 +44,10 @@ use Doctrine\ORM\Mapping as ORM;
    }
 
    /**
-    * @param string $name
+    * @param string $title
     */
-   public function setName($name)
+   public function setTitle($title)
    {
-       $this->name = $name;
+       $this->title = $title;
    }
  }
