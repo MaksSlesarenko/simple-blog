@@ -53,6 +53,7 @@ echo "Installing composer packages..."
 cd $ROOT_DIR
 composer install > /dev/null
 
+
 echo "Configuring symfony"
 cp $ROOT_DIR/app/config/parameters.yml.dist $ROOT_DIR/app/config/parameters.yml
 
@@ -62,3 +63,5 @@ sed -i "s@database_password:.*@database_password: $DB_PASSWORD@" $ROOT_DIR/app/c
 sed -i "s@database_user:.*@database_user: $DB_USER@" $ROOT_DIR/app/config/parameters.yml
 sed -i 's@pdo_mysql@"%database_driver%"@' $ROOT_DIR/app/config/config.yml
 sed -i "s@parameters:@parameters:\n    database_driver: $DB_DRIVER@" $ROOT_DIR/app/config/parameters.yml
+
+bin/console doctrine:schema:update --force

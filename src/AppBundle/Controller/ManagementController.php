@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\Post;
 
 class ManagementController extends Controller
@@ -15,7 +17,7 @@ class ManagementController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->get('doctrine.orm.entity_manager');
-        $dql = "SELECT a FROM AcmeMainBundle:Article a";
+        $dql = "SELECT p FROM AppBundle:Post p";
         $query = $em->createQuery($dql);
 
         $paginator  = $this->get('knp_paginator');
@@ -29,7 +31,7 @@ class ManagementController extends Controller
     }
 
     /**
-     * @Route("/post/add", name="post_add")
+     * @Route("/management/post/add", name="post_add")
      */
     public function addAction(Request $request)
     {
@@ -38,15 +40,16 @@ class ManagementController extends Controller
 
         $form = $this->createFormBuilder($post)
             ->add('title', TextType::class)
+            ->add('save', SubmitType::class, ['label' => 'Create'])
             ->getForm();
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $post->setTitle($form->get("title"));
+            $post->setTitle($form->get("title")->getData());
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();
-            
+
             return $this->redirectToRoute('management');
         }
 

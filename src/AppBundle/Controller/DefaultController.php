@@ -14,7 +14,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->get('doctrine.orm.entity_manager');
-        $dql = "SELECT a FROM AcmeMainBundle:Article a";
+        $dql = "SELECT p FROM AppBundle:Post p";
         $query = $em->createQuery($dql);
 
         $paginator  = $this->get('knp_paginator');
