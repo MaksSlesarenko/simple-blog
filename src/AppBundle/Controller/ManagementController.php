@@ -27,7 +27,7 @@ class ManagementController extends Controller
             13
         );
 
-        return $this->render('management/index.html.twig', ['pagination' => $pagination]);
+        return $this->render('AppBundle:Management:index.html.twig', ['pagination' => $pagination]);
     }
 
     /**
@@ -53,7 +53,38 @@ class ManagementController extends Controller
             return $this->redirectToRoute('management');
         }
 
-        return $this->render('management/add.html.twig', [
+        return $this->render('AppBundle:Management:add.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/management/post/{id}/edit", name="post_edit")
+     */
+    public function editAction($id)
+    {
+        $post = $this->getDoctrine()->getRepository('AppBundle:Post')->find($id);
+
+        if (!$post) {
+           throw $this->createNotFoundException('No post found for id ' . $id);
+        }
+
+        $form = $this->createFormBuilder($post)
+            ->add('title', TextType::class)
+            ->add('save', SubmitType::class, ['label' => 'Update'])
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $post->setTitle($form->get("title")->getData());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirectToRoute('management');
+        }
+
+        return $this->render('AppBundle:Management:edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }

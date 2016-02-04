@@ -65,3 +65,4 @@ sed -i 's@pdo_mysql@"%database_driver%"@' $ROOT_DIR/app/config/config.yml
 sed -i "s@parameters:@parameters:\n    database_driver: $DB_DRIVER@" $ROOT_DIR/app/config/parameters.yml
 
 bin/console doctrine:schema:update --force
+bin/console assets:install

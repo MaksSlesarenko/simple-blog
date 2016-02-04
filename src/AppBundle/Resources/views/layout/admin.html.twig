@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Admin{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('bundles/app/css/bootstrap.css') }}" rel="stylesheet" />
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <h1>Admin block</h1>
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('bundles/app/js/require.js') }}"></script>
+            <script src="{{ asset('bundles/app/js/config.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>
