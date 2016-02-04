@@ -24,7 +24,7 @@ class DefaultController extends Controller
             13
         );
 
-        return $this->render('default/index.html.twig', ['pagination' => $pagination]);
+        return $this->render('AppBundle:Default:index.html.twig', ['pagination' => $pagination]);
     }
 
     /**
@@ -38,7 +38,7 @@ class DefaultController extends Controller
            throw $this->createNotFoundException('No post found for id ' . $id);
         }
 
-        return $this->render('default/show.html.twig', [
+        return $this->render('AppBundle:Default:show.html.twig', [
             'post' => $post
         ]);
     }
