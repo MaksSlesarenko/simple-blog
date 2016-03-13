@@ -61,8 +61,7 @@ sed -i "s@database_port:.*@database_port: $DB_PORT@" $ROOT_DIR/app/config/parame
 sed -i "s@database_name:.*@database_name: $DB_NAME@" $ROOT_DIR/app/config/parameters.yml
 sed -i "s@database_password:.*@database_password: $DB_PASSWORD@" $ROOT_DIR/app/config/parameters.yml
 sed -i "s@database_user:.*@database_user: $DB_USER@" $ROOT_DIR/app/config/parameters.yml
-sed -i 's@pdo_mysql@"%database_driver%"@' $ROOT_DIR/app/config/config.yml
-sed -i "s@parameters:@parameters:\n    database_driver: $DB_DRIVER@" $ROOT_DIR/app/config/parameters.yml
+sed -i "s@pdo_mysql@$DB_DRIVER@" $ROOT_DIR/app/config/config.yml
 
 bin/console doctrine:schema:update --force
 bin/console assets:install
