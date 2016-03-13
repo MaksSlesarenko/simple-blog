@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new AppBundle\AppBundle(),
+            new ApiBundle\ApiBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -14,7 +14,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->get('doctrine.orm.entity_manager');
-        $dql = "SELECT p FROM AppBundle:Post p";
+        $dql = "SELECT p FROM ApiBundle:Post p";
         $query = $em->createQuery($dql);
 
         $paginator  = $this->get('knp_paginator');
@@ -24,7 +24,7 @@ class DefaultController extends Controller
             13
         );
 
-        return $this->render('AppBundle:Default:index.html.twig', ['pagination' => $pagination]);
+        return $this->render('AppBundle:default:index.html.twig', ['pagination' => $pagination]);
     }
 
     /**
@@ -32,14 +32,22 @@ class DefaultController extends Controller
      */
     public function showAction($id)
     {
-        $post = $this->getDoctrine()->getRepository('AppBundle:Post')->find($id);
+        $post = $this->getDoctrine()->getRepository('ApiBundle:Post')->find($id);
 
         if (!$post) {
            throw $this->createNotFoundException('No post found for id ' . $id);
         }
 
-        return $this->render('AppBundle:Default:show.html.twig', [
+        return $this->render('AppBundle:default:show.html.twig', [
             'post' => $post
         ]);
+    }
+
+    /**
+     * @Route("/management", name="management")
+     */
+    public function managementAction(Request $request)
+    {
+        return $this->render('AppBundle:management:index.html.twig');
     }
 }

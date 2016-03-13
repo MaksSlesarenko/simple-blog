@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace ApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="posts")
  */
- class Post {
+ class Post implements \JsonSerializable
+ {
    /**
     * @ORM\Column(type="integer")
     * @ORM\Id
@@ -50,4 +51,12 @@ use Doctrine\ORM\Mapping as ORM;
    {
        $this->title = $title;
    }
+
+   public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'title'=> $this->title,
+        ];
+    }
  }
