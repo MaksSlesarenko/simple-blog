@@ -9,12 +9,13 @@ require.config({
     // if you need disable JS cache
     urlArgs: "bust=" + (new Date()).getTime(),
     paths: {
-        "bootstrap": './bootstrap.min',
-        "underscore": './marionette/underscore',
-        "jquery": './marionette/jquery',
-        "json2": './marionette/json2',
-        "backbone": './marionette/backbone',
-        "marionette": './marionette/backbone.marionette'
+        "bootstrap": './vendor/bootstrap.min.js',
+        "underscore": 'vendor/marionette/underscore',
+        "jquery": 'vendor/marionette/jquery',
+        "json2": 'vendor/marionette/json2',
+        "backbone": 'vendor/marionette/backbone',
+        "marionette": 'vendor/marionette/backbone.marionette',
+        "jquery-ui": "vendor/jquery-ui"
     },
     shim: {
       "bootstrap": {
@@ -34,9 +35,12 @@ require.config({
       "marionette": {
         deps: ["backbone"],
         exports: "Marionette"
-      }
+      },
+      "jquery-ui": ["jquery"]
     },
     enforceDefine: true
 });
 
-require(['marionette', 'bootstrap']);
+require(['management/app'], function (PostManager) {
+  PostManager.start();
+});

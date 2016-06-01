@@ -1,5 +1,49 @@
 {% extends 'AppBundle::admin.html.twig' %}
 
 {% block body %}
-  <div class="wrapper"></div>
+  <div id="header-region"></div>
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <span class="brand">Post manager</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper" id="main-region"></div>
+
+  <div id="dialog-region"></div>
+
+  <script type="text/template" id="post-list-item">
+    <td><%= title %></td>
+    <td>
+      <a href="#posts/<%= id %>" class="btn btn-sm js-show">
+        <!--<i class="glyphicon glyphicon-eye-open"></i>-->
+        Show
+      </a>
+      <button class="btn btn-sm js-delete">
+        <!--<i class="glyphicon glyphicon-remove"></i>-->
+        Delete
+      </button>
+    </td>
+  </script>
+
+  <script type="text/template" id="post-list">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+  </script>
+
+  <script type="text/template" id="post-view">
+    <h1><%= title %></h1>
+  </script>
+
+  <script type="text/template" id="missing-post-view">
+    <div class="alert alert-error">This post doesn't exist !</div>
+  </script>
 {% endblock %}

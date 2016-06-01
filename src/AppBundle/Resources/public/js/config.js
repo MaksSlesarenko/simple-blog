@@ -9,8 +9,8 @@ require.config({
     // if you need disable JS cache
     // urlArgs: "bust=" + (new Date()).getTime(),
     paths: {
-        "": './bootstrap.min',
-        "jquery": './jquery-2.2.0.min',
+        "": './vendor/bootstrap.min.js',
+        "jquery": './vendor/jquery-2.2.0.min.js'
     },
     shim: {
         "bootstrap": {
