@@ -1,58 +1,110 @@
-/**
- * Created by lekskazimirchuk on 4/3/16.
- */
-ContactManager.module("ContactsApp.List", function (
-    List,
-    ContactManager,
-    Backbone,
-    Marionette,
-    $,
-    _
-) {
-    List.Contact = Marionette.ItemView.extend({
-        template: "#contact-list-item",
-        tagName: "tr",
+define(["management/app",
+    "tpl!management/apps/posts/list/templates/layout.tpl",
+    "tpl!management/apps/posts/list/templates/panel.tpl",
+    "tpl!management/apps/posts/list/templates/none.tpl",
+    "tpl!management/apps/posts/list/templates/list.tpl",
+    "tpl!management/apps/posts/list/templates/list_item.tpl"],
+  function (PostManager, layoutTpl, panelTpl, noneTpl, listTpl, listItemTpl) {
+    PostManager.module("PostsApp.List.View", function (View, PostManager, Backbone, Marionette, $, _) {
+      View.Layout = Marionette.LayoutView.extend({
+        template: layoutTpl,
+
+        regions: {
+          panelRegion: "#panel-region",
+          postsRegion: "#posts-region"
+        }
+      });
+
+      View.Panel = Marionette.ItemView.extend({
+        template: panelTpl,
+
+        triggers: {
+          "click button.js-new": "post:new"
+        },
 
         events: {
-            "click": "highlightName",
-            "click button.js-delete": "deleteClicked",
-            "click td a.js-show": "showClicked"
+          "submit #filter-form": "filterPosts"
         },
 
-        highlightName: function () {
-            this.$el.toggleClass("warning");
-        },
-        deleteClicked: function (event) {
-            event.stopPropagation();
-            this.trigger("contact:delete", this.model);
-        },
-        showClicked: function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            this.trigger("contact:show", this.model);
+        ui: {
+          criterion: "input.js-filter-criterion"
         },
 
-        //lifecycle events
-        remove: function () {
-            var self = this;
-            this.$el.fadeOut(function () {
-                Marionette.ItemView.prototype.remove.call(self);
-            });
+        filterPosts: function (e) {
+          e.preventDefault();
+          var criterion = this.$(".js-filter-criterion").val();
+          this.trigger("posts:filter", criterion);
+        },
+
+        onSetFilterCriterion: function (criterion) {
+          this.ui.criterion.val(criterion);
         }
-    });
+      });
 
-    List.Contacts = Marionette.CompositeView.extend({
+      View.Post = Marionette.ItemView.extend({
+        tagName: "tr",
+        template: listItemTpl,
+
+        triggers: {
+          "click td a.js-show": "post:show",
+          "click td a.js-edit": "post:edit",
+          "click button.js-delete": "post:delete"
+        },
+
+        events: {
+          "click": "highlightName"
+        },
+
+        flash: function (cssClass) {
+          var $view = this.$el;
+          $view.hide().toggleClass(cssClass).fadeIn(800, function () {
+            setTimeout(function () {
+              $view.toggleClass(cssClass)
+            }, 500);
+          });
+        },
+
+        highlightName: function (e) {
+          this.$el.toggleClass("warning");
+        },
+
+        remove: function () {
+          var self = this;
+          this.$el.fadeOut(function () {
+            Marionette.ItemView.prototype.remove.call(self);
+          });
+        }
+      });
+
+      var NoPostsView = Marionette.ItemView.extend({
+        template: noneTpl,
+        tagName: "tr",
+        className: "alert"
+      });
+
+      View.Posts = Marionette.CompositeView.extend({
         tagName: "table",
         className: "table table-hover",
-        template: "#contact-list",
-        childView: List.Contact,
+        template: listTpl,
+        emptyView: NoPostsView,
+        childView: View.Post,
         childViewContainer: "tbody",
 
-        //Magic method that is called by Marionette after the event has been triggered
-        // onChildviewContactDelete: function () {
-        //     this.$el.fadeOut(1000, function () {
-        //         $(this).fadeIn(1000);
-        //     })
-        // }
+        initialize: function () {
+          this.listenTo(this.collection, "reset", function () {
+            this.attachHtml = function (collectionView, childView, index) {
+              collectionView.$el.append(childView.el);
+            }
+          });
+        },
+
+        onRenderCollection: function () {
+          this.attachHtml = function (collectionView, childView, index) {
+            collectionView.$el.prepend(childView.el);
+          }
+        }
+      });
     });
-});
+
+    return PostManager.PostsApp.List.View;
+  });

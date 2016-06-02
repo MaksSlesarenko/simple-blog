@@ -8,8 +8,8 @@
             <link href="{{ asset('bundles/app/css/management.css') }}" rel="stylesheet" />
         {% endblock %}
         {% block javascripts %}
-            <script src="{{ asset('bundles/app/js/vendor/require.js') }}"></script>
-            <script src="{{ asset('bundles/app/js/config-admin.js') }}"></script>
+            <script data-main="{{ asset('bundles/app/js/config-admin.js') }}"
+                    src="{{ asset('bundles/app/js/vendor/require.js') }}"></script>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>

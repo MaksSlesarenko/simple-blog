@@ -1,0 +1,1 @@
+<div class="alert alert-error">This post doesn't exist !</div>

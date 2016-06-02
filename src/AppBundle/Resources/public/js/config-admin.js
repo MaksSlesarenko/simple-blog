@@ -2,45 +2,58 @@
  * Configuration example
  * @author Anton Shevchuk
  */
-/*global define,require*/
 require.config({
-    // why not simple "js"? Because IE eating our minds!
-    baseUrl: '/bundles/app/js',
-    // if you need disable JS cache
-    urlArgs: "bust=" + (new Date()).getTime(),
-    paths: {
-        "bootstrap": './vendor/bootstrap.min.js',
-        "underscore": 'vendor/marionette/underscore',
-        "jquery": 'vendor/marionette/jquery',
-        "json2": 'vendor/marionette/json2',
-        "backbone": 'vendor/marionette/backbone',
-        "marionette": 'vendor/marionette/backbone.marionette',
-        "jquery-ui": "vendor/jquery-ui"
+  baseUrl: '/bundles/app/js',
+  // urlArgs: "bust=" + (new Date()).getTime(),
+  // enforceDefine: true,
+  paths: {
+    "bootstrap": './vendor/bootstrap.min.js',
+    "underscore": './vendor/underscore',
+    "jquery": './vendor/jquery',
+    "json2": './vendor/json2',
+    "backbone": './vendor/backbone',
+    "backbone.picky": "vendor/backbone.picky",
+    "backbone.syphon": "vendor/backbone.syphon",
+    "marionette": './vendor/backbone.marionette',
+    "jquery-ui": "./vendor/jquery-ui",
+    "localstorage": './vendor/backbone.localStorage',
+    "spin": "./vendor/spin",
+    "spin.jquery": "./vendor/spin.jquery",
+    "text": "./vendor/text",
+    "tpl": "./vendor/underscore-tpl"
+  },
+  shim: {
+    "bootstrap": {
+      deps: ['jquery'],
+      exports: '$.fn.popover'
     },
-    shim: {
-      "bootstrap": {
-          deps: ['jquery'],
-          exports: '$.fn.popover'
-      },
-      "json2": {
-        exports: 'JSON'
-      },
-      "backbone": {
-          deps: ['underscore', 'jquery', 'json2'],
-          exports: 'Backbone'
-      },
-      "underscore": {
-          exports: '_'
-      },
-      "marionette": {
-        deps: ["backbone"],
-        exports: "Marionette"
-      },
-      "jquery-ui": ["jquery"]
+    "json2": {
+      exports: 'JSON'
     },
-    enforceDefine: true
+    "backbone": {
+      deps: ['underscore', 'jquery', 'json2'],
+      exports: 'Backbone'
+    },
+    "underscore": {
+      exports: '_'
+    },
+    "marionette": {
+      deps: ["backbone"],
+      exports: "Marionette"
+    },
+    "localstorage": ['backbone'],
+    "jquery-ui": ["jquery"],
+    "backbone.picky": ["backbone"],
+    "backbone.syphon": ["backbone"],
+    "spin.jquery": ["spin", "jquery"],
+    "tpl": ["text"]
+  }
 });
 
-require(['management/app'], function (PostManager) {
+require([
+  "management/app",
+  "management/apps/header/header_app",
+  "management/apps/posts/posts_app_router"
+], function(PostManager){
   PostManager.start();
 });
