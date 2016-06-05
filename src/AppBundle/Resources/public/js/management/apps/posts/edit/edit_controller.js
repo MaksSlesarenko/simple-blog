@@ -15,7 +15,7 @@ define(["management/app", "management/apps/posts/edit/edit_view"], function(
   ){
     Edit.Controller = {
       editPost: function(id){
-        require(["management/common/views", "management/entities/post"], function(CommonViews){
+        require(["management/common/views", "management/entities/post/model"], function(CommonViews){
           var loadingView = new CommonViews.Loading({
             title: "Artificial Loading Delay",
             message: "Data loading is delayed to demonstrate using a loading view."

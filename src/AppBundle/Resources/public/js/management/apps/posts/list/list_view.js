@@ -1,11 +1,19 @@
-define(["management/app",
-    "tpl!management/apps/posts/list/templates/layout.tpl",
-    "tpl!management/apps/posts/list/templates/panel.tpl",
-    "tpl!management/apps/posts/list/templates/none.tpl",
-    "tpl!management/apps/posts/list/templates/list.tpl",
-    "tpl!management/apps/posts/list/templates/list_item.tpl"],
-  function (PostManager, layoutTpl, panelTpl, noneTpl, listTpl, listItemTpl) {
-    PostManager.module("PostsApp.List.View", function (View, PostManager, Backbone, Marionette, $, _) {
+define([
+  "management/app",
+  "tpl!management/apps/posts/list/templates/layout.tpl",
+  "tpl!management/apps/posts/list/templates/panel.tpl",
+  "tpl!management/apps/posts/list/templates/none.tpl",
+  "tpl!management/apps/posts/list/templates/list.tpl",
+  "tpl!management/apps/posts/list/templates/list_item.tpl"
+], function (PostManager, layoutTpl, panelTpl, noneTpl, listTpl, listItemTpl) {
+    PostManager.module("PostsApp.List.View", function (
+      View, 
+      PostManager, 
+      Backbone, 
+      Marionette, 
+      $, 
+      _
+    ) {
       View.Layout = Marionette.LayoutView.extend({
         template: layoutTpl,
 
@@ -20,24 +28,6 @@ define(["management/app",
 
         triggers: {
           "click button.js-new": "post:new"
-        },
-
-        events: {
-          "submit #filter-form": "filterPosts"
-        },
-
-        ui: {
-          criterion: "input.js-filter-criterion"
-        },
-
-        filterPosts: function (e) {
-          e.preventDefault();
-          var criterion = this.$(".js-filter-criterion").val();
-          this.trigger("posts:filter", criterion);
-        },
-
-        onSetFilterCriterion: function (criterion) {
-          this.ui.criterion.val(criterion);
         }
       });
 

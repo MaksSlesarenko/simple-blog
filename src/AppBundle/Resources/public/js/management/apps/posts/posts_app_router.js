@@ -12,7 +12,7 @@ define(["management/app"], function(PostManager){
   ){
     PostsAppRouter.Router = Marionette.AppRouter.extend({
       appRoutes: {
-        "posts(/filter/criterion::criterion)": "listPosts",
+        "posts": "listPosts",
         "posts/:id": "showPost",
         "posts/:id/edit": "editPost"
       }
@@ -25,9 +25,9 @@ define(["management/app"], function(PostManager){
     };
 
     var API = {
-      listPosts: function(criterion){
+      listPosts: function(){
         require(["management/apps/posts/list/list_controller"], function(ListController){
-          executeAction(ListController.listPosts, criterion);
+          executeAction(ListController.listPosts);
         });
       },
 
@@ -47,15 +47,6 @@ define(["management/app"], function(PostManager){
     PostManager.on("posts:list", function(){
       PostManager.navigate("posts");
       API.listPosts();
-    });
-
-    PostManager.on("posts:filter", function(criterion){
-      if(criterion){
-        PostManager.navigate("posts/filter/criterion:" + criterion);
-      }
-      else{
-        PostManager.navigate("posts");
-      }
     });
 
     PostManager.on("post:show", function(id){
