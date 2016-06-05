@@ -1,21 +1,23 @@
 /**
  * Created by lekskazimirchuk on 6/1/16.
  */
-define(["marionette", "jquery-ui"], function (Marionette) { 
+define(['marionette', 'jquery-ui'], function (Marionette) {
   Marionette.Region.Dialog = Marionette.Region.extend({
-    onShow: function(view){
-      this.listenTo(view, "dialog:close", this.closeDialog);
+    onShow: function (view) {
+      this.listenTo(view, 'dialog:close', this.closeDialog);
       var self = this; 
       this.$el.dialog({
         modal: true,
-        title: view.title, width: "auto",
-        close: function(e, ui){
+        title: view.title, width: 'auto',
+        close: function (e, ui) {
           self.closeDialog();
         }
       }); 
     },
-    closeDialog: function(){ 
-      this.stopListening(); this.close(); this.$el.dialog("destroy");
+    closeDialog: function () { 
+      this.stopListening(); 
+      this.close(); 
+      this.$el.dialog('destroy');
     } 
   });
   
