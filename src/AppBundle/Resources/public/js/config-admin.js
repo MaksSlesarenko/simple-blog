@@ -2,7 +2,7 @@ require.config({
   baseUrl: '/bundles/app/js',
   urlArgs: 'bust=' + (new Date()).getTime(),
   paths: {
-    'bootstrap': './vendor/bootstrap.min.js',
+    'bootstrap': './vendor/bootstrap',
     'underscore': './vendor/underscore',
     'jquery': './vendor/jquery',
     'json2': './vendor/json2',
@@ -10,7 +10,6 @@ require.config({
     'backbone.picky': 'vendor/backbone.picky',
     'backbone.syphon': 'vendor/backbone.syphon',
     'marionette': './vendor/backbone.marionette',
-    'jquery-ui': './vendor/jquery-ui',
     'localstorage': './vendor/backbone.localStorage',
     'spin': './vendor/spin',
     'spin.jquery': './vendor/spin.jquery',
@@ -18,10 +17,7 @@ require.config({
     'tpl': './vendor/underscore-tpl'
   },
   shim: {
-    'bootstrap': {
-      deps: ['jquery'],
-      exports: '$.fn.popover'
-    },
+    'bootstrap': ['jquery'],
     'json2': {
       exports: 'JSON'
     },
@@ -37,7 +33,6 @@ require.config({
       exports: 'Marionette'
     },
     'localstorage': ['backbone'],
-    'jquery-ui': ['jquery'],
     'backbone.picky': ['backbone'],
     'backbone.syphon': ['backbone'],
     'spin.jquery': ['spin', 'jquery'],

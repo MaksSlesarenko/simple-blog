@@ -1,4 +1,8 @@
-define(['marionette', 'jquery-ui'], function (Marionette) {
+define([
+  'marionette',
+  'bootstrap',
+  'management/apps/config/marionette/regions/dialog'
+], function (Marionette) {
   var PostManager = new Marionette.Application();
 
   PostManager.navigate = function (route, options) {
@@ -31,30 +35,13 @@ define(['marionette', 'jquery-ui'], function (Marionette) {
       regions: {
         header: '#header-region',
         main: '#main-region',
-        dialog: '#dialog-region'
+        dialog: Marionette.Region.Dialog.extend({
+          el: "#dialog-region"
+        })
       }
     });
 
     PostManager.regions = new RegionContainer();
-    PostManager.regions.dialog.onShow = function (view) {
-      var self = this;
-      var closeDialog = function () {
-        self.stopListening();
-        self.empty();
-        self.$el.dialog('destroy');
-      };
-
-      this.listenTo(view, 'dialog:close', closeDialog);
-
-      this.$el.dialog({
-        modal: true,
-        title: view.title,
-        width: 'auto',
-        close: function (e, ui) {
-          closeDialog();
-        }
-      });
-    };
   });
 
   PostManager.on('start', function () {

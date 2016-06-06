@@ -1,23 +1,28 @@
 /**
  * Created by lekskazimirchuk on 6/1/16.
  */
-define(['marionette', 'jquery-ui'], function (Marionette) {
+define(['marionette', 'bootstrap'], function (Marionette) {
   Marionette.Region.Dialog = Marionette.Region.extend({
+    getModal: function () {
+      return this.$el.find('#myModal');
+    },
     onShow: function (view) {
       this.listenTo(view, 'dialog:close', this.closeDialog);
-      var self = this; 
-      this.$el.dialog({
-        modal: true,
-        title: view.title, width: 'auto',
-        close: function (e, ui) {
+      var self = this;
+      var modal = this.getModal();
+      $(modal).modal({
+        keyboard: false,
+        backdrop: 'static',
+        close: function () {
           self.closeDialog();
         }
-      }); 
+      });
+      $(modal).modal('show');
     },
-    closeDialog: function () { 
-      this.stopListening(); 
-      this.close(); 
-      this.$el.dialog('destroy');
+    closeDialog: function (e) {
+      var modal = this.getModal();
+      this.stopListening();
+      modal.modal('hide');
     } 
   });
   
