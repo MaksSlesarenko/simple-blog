@@ -1,5 +1,6 @@
 <td><%- id %></td>
 <td><%- title %></td>
+<td><%- description %></td>
 <td>
     <a href="#posts/<%- id %>" class="btn btn-small js-show">
         <i class="icon-eye-open"></i>

@@ -37,7 +37,7 @@ define([
 
     View.Headers = Marionette.CompositeView.extend({
       template: listTpl,
-      className: 'navbar navbar-inverse navbar-fixed-top',
+      className: 'navbar navbar-default navbar-fixed-top',
       childView: View.Header,
       childViewContainer: 'ul',
 
