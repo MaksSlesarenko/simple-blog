@@ -10,7 +10,6 @@ require.config({
     'backbone.picky': 'vendor/backbone.picky',
     'backbone.syphon': 'vendor/backbone.syphon',
     'marionette': './vendor/backbone.marionette',
-    'localstorage': './vendor/backbone.localStorage',
     'spin': './vendor/spin',
     'spin.jquery': './vendor/spin.jquery',
     'text': './vendor/text',
@@ -32,7 +31,6 @@ require.config({
       deps: ['backbone'],
       exports: 'Marionette'
     },
-    'localstorage': ['backbone'],
     'backbone.picky': ['backbone'],
     'backbone.syphon': ['backbone'],
     'spin.jquery': ['spin', 'jquery'],

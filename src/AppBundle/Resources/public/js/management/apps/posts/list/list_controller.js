@@ -33,13 +33,6 @@ define(['management/app', 'management/apps/posts/list/list_view'], function (Pos
                 });
 
                 view.on('form:submit', function (data) {
-                  if(posts.length > 0){
-                    var highestId = posts.max(function (c) { return c.id; }).get("id");
-                    data.id = highestId + 1;
-                  }
-                  else{
-                    data.id = 1;
-                  }
                   if(newPost.save(data)){
                     posts.add(newPost);
                     view.trigger('dialog:close');

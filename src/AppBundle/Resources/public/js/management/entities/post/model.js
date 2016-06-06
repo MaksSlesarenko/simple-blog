@@ -4,12 +4,14 @@
 define([
   'jquery',
   'backbone',
-  'management/app',
-  'management/apps/config/storage/localstorage'
-], function ($, Backbone, PostManager, configureStorage) {
+  'management/app'
+], function (
+  $,
+  Backbone,
+  PostManager
+) {
   var Post = Backbone.Model.extend({
-    urlRoot: 'posts',
-
+    urlRoot: '/api/posts',
     defaults: {
       title: '',
       description: '',
@@ -34,7 +36,7 @@ define([
       }
     }
   });
-  configureStorage(Post);
+
   var API={
     getPostEntity: function (postId) {
       var post = new Post({id: postId});

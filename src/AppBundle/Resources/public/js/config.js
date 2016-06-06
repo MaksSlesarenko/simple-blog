@@ -1,7 +1,7 @@
 require.config({
   baseUrl: '/js',
   paths: {
-    '': './vendor/bootstrap.min.js',
+    '': './vendor/bootstrap.js',
     'jquery': './vendor/jquery-2.2.0.min.js'
   },
   shim: {
