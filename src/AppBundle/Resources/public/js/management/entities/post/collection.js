@@ -23,7 +23,6 @@ define([
       var defer = $.Deferred();
       posts.fetch({
         success: function (data) {
-          console.log(data);
           defer.resolve(data);
         }
       });

@@ -33,16 +33,20 @@ define(['management/app', 'management/apps/posts/list/list_view'], function (Pos
                 });
 
                 view.on('form:submit', function (data) {
-                  if(newPost.save(data)){
-                    posts.add(newPost);
-                    view.trigger('dialog:close');
-                    var newPostView = postsListView.children.findByModel(newPost);
-                    // check whether the new post view is displayed 
-                    if(newPostView){
-                      newPostView.flash('success');
-                    }
-                  }
-                  else{
+                  newPost.set(data, {validate: true});
+                  if (!newPost.validationError) {
+                    newPost.save(data).then(function (savedModel) {
+                      if (!$.isEmptyObject(savedModel)) {
+                        posts.add(savedModel);
+                        view.trigger('dialog:close');
+                        var newPostView = postsListView.children.findByModel(savedModel);
+                        // check whether the new post view is displayed
+                        if (newPostView) {
+                          newPostView.flash('success');
+                        }
+                      }
+                    });
+                  } else {
                     view.triggerMethod('form:data:invalid', newPost.validationError);
                   }
                 });

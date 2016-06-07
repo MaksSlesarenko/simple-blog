@@ -5,12 +5,10 @@ define(['management/app', 'management/apps/posts/show/show_view'], function (Pos
         'management/common/views', 
         'management/entities/post/model'
       ], function (CommonViews) {
-        var loadingView = new CommonViews.Loading({
-          title: 'Artificial Loading Delay',
-          message: 'Data loading is delayed to demonstrate using a loading view.'
-        });
-        PostManager.regions.main.show(loadingView);
-
+        PostManager.regions.main.show(new CommonViews.Loading({
+          title: "Loading...",
+          message: 'Please, wait!'
+        }));
         var fetchingPost = PostManager.request('post:entity', id);
         $.when(fetchingPost).done(function (post) {
           var postView;

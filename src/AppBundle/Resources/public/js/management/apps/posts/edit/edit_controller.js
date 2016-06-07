@@ -3,7 +3,7 @@
  */
 define(['management/app', 'management/apps/posts/edit/edit_view'], function (
   PostManager, 
-  View
+  EditView
 ) {
   PostManager.module('PostsApp.Edit', function (
     Edit,
@@ -19,19 +19,17 @@ define(['management/app', 'management/apps/posts/edit/edit_view'], function (
           'management/common/views',
           'management/entities/post/model'
         ], function (CommonViews) {
-          var loadingView = new CommonViews.Loading({
-            title: 'Artificial Loading Delay',
-            message: 'Data loading is delayed to demonstrate using a loading view.'
-          });
-          PostManager.regions.main.show(loadingView);
-
+          PostManager.regions.main.show(new CommonViews.Loading({
+            title: "Loading...",
+            message: 'Please, wait!'
+          }));
           var fetchingPost = PostManager.request('post:entity', id);
           $.when(fetchingPost).done(function (post) {
             var view;
             if (post !== undefined) {
-              view = new View.Post({
-                model: post,
-                generateTitle: true
+              // view = new EditView.Post({
+              view = new Edit.View.Post({
+                model: post
               });
 
               view.on('form:submit', function (data) {
@@ -44,8 +42,8 @@ define(['management/app', 'management/apps/posts/edit/edit_view'], function (
             } else {
               view = new PostManager.PostsApp.Show.MissingPost();
             }
-
-            PostManager.regions.main.show(view);
+            PostManager.regions.main.reset();
+            PostManager.regions.dialog.show(view);
           });
         });
       }

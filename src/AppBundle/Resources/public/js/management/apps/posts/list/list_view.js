@@ -4,7 +4,8 @@ define([
   'tpl!management/apps/posts/list/templates/panel.tpl',
   'tpl!management/apps/posts/list/templates/none.tpl',
   'tpl!management/apps/posts/list/templates/list.tpl',
-  'tpl!management/apps/posts/list/templates/list_item.tpl'
+  'tpl!management/apps/posts/list/templates/list_item.tpl',
+  'management/apps/config/marionette/regions/dialog'
 ], function (PostManager, layoutTpl, panelTpl, noneTpl, listTpl, listItemTpl) {
   PostManager.module('PostsApp.List.View', function (
     View,
@@ -19,7 +20,10 @@ define([
 
       regions: {
         panelRegion: '#panel-region',
-        postsRegion: '#posts-region'
+        postsRegion: '#posts-region',
+        dialog: Marionette.Region.Dialog.extend({
+          el: "#dialog-region"
+        })
       }
     });
 
@@ -72,26 +76,16 @@ define([
       className: 'alert'
     });
 
-    View.Posts = Marionette.CompositeView.extend({
+    View.Posts = Marionette.CollectionView.extend({
       tagName: 'table',
       className: 'table table-hover',
       template: listTpl,
       emptyView: NoPostsView,
       childView: View.Post,
       childViewContainer: 'tbody',
-
-      initialize: function () {
-        this.listenTo(this.collection, 'reset', function () {
-          this.attachHtml = function (collectionView, childView, index) {
-            collectionView.$el.append(childView.el);
-          }
-        });
-      },
-
-      onRenderCollection: function () {
-        this.attachHtml = function (collectionView, childView, index) {
-          collectionView.$el.prepend(childView.el);
-        }
+      collectionEvents: {
+        'add': 'render',
+        'remove': 'render'
       }
     });
   });

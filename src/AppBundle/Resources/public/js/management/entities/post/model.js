@@ -41,16 +41,15 @@ define([
     getPostEntity: function (postId) {
       var post = new Post({id: postId});
       var defer = $.Deferred();
-      setTimeout(function () {
-        post.fetch({
-          success: function (data) {
-            defer.resolve(data);
-          },
-          error: function (data) {
-            defer.resolve(undefined);
-          }
-        });
-      }, 2000);
+      
+      post.fetch({
+        success: function (data) {
+          defer.resolve(data);
+        },
+        error: function (data) {
+          defer.resolve(undefined);
+        }
+      });
       
       return defer.promise();
     }
