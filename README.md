@@ -4,6 +4,7 @@ simple-blog
 Every developer should have his own blog, at least a code for it.
 
 Back-end: Symfony 3
+
 Front-end: Marionette
 
 Try it out
