@@ -1,7 +1,7 @@
 html {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    font-size: 100%;
+    font-size: 80%;
 }
 
 body {
@@ -13,4 +13,11 @@ body {
 
 ul {
     list-style-type: none;
+}
+
+td {
+    text-overflow: ellipsis;
+    max-width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
 }

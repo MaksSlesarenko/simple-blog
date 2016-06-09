@@ -28,15 +28,18 @@ define([
       var errors = {};
       if (!attrs.title) {
         errors.title = 'can\'t be blank';
+      }  else if (attrs.title.length > 100) {
+        errors.title = 'is too big';
       }
       if (!attrs.description) {
         errors.description = 'can\'t be blank';
+      }  else if (attrs.description.length > 140) {
+        errors.description = 'is too big';
       }
-      else {
-        if (attrs.description.length > 140) {
-          errors.description = 'is too big';
-        }
+      if (!attrs.body) {
+        errors.body = 'can\'t be blank';
       }
+
       if (!_.isEmpty(errors)) {
         return errors;
       }
