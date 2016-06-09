@@ -17,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         <label for="post-body">Body:</label>
-                        <input id="post-body" name="body" class="form-control" type="text" value="<%- body %>"/>
+                        <textarea id="post-body" name="body" class="form-control" rows="10"><%- body %></textarea>
                     </div>
                 </form>
             </div>
