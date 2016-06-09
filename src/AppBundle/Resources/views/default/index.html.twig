@@ -3,7 +3,11 @@
 {% block body %}
     <ul class="posts">
         {% for post in pagination %}
-            <li><a href="{{ path('post_show', {'id': post.id}) }}">{{ post.title }}</a></li>
+            <div class="post-panel">
+                <p><small>{{ post.createdAt.date }}</small></p>
+                <li><a href="{{ path('post_show', {'id': post.id}) }}">{{ post.title }}</a></li>
+                <p>{{ post.description }}</p>
+            </div>
         {% else %}
             <li>No posts found :(</li>
         {% endfor %}

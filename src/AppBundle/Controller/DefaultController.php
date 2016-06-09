@@ -21,7 +21,7 @@ class DefaultController extends Controller
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            13
+            5
         );
 
         return $this->render('AppBundle:default:index.html.twig', ['pagination' => $pagination]);

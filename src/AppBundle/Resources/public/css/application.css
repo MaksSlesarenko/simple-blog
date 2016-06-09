@@ -1,0 +1,39 @@
+html {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 100%;
+}
+
+body {
+    margin-left: auto;
+    margin-right: auto;
+    width: 62%;
+
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.post-panel {
+    border-bottom-style: inset;
+}
+
+.post-panel>p>small, .post>p>small {
+    color: lightgrey;
+}
+
+.pagination {
+    text-align: center;
+}
+
+.pagination > span.current {
+    color: lightgrey;
+}
+
+.pagination a {
+    text-decoration: none;
+}
