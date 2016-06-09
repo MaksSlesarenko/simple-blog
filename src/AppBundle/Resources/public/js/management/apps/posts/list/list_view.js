@@ -76,7 +76,7 @@ define([
       className: 'alert'
     });
 
-    View.Posts = Marionette.CollectionView.extend({
+    View.Posts = Marionette.CompositeView.extend({
       tagName: 'table',
       className: 'table table-hover',
       template: listTpl,
