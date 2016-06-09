@@ -46,7 +46,7 @@ class Post implements \JsonSerializable
     protected $description;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      *
      * @Assert\NotBlank()
      * @Assert\Length(min=1)

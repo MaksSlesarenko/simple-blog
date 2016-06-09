@@ -64,4 +64,5 @@ sed -i "s@database_user:.*@database_user: $DB_USER@" $ROOT_DIR/app/config/parame
 sed -i "s@pdo_mysql@$DB_DRIVER@" $ROOT_DIR/app/config/config.yml
 
 bin/console doctrine:schema:update --force
+bin/console doctrine:fixtures:load
 bin/console assets:install
