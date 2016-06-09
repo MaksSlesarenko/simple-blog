@@ -24,6 +24,11 @@ define([
       posts.fetch({
         success: function (data) {
           defer.resolve(data);
+        },
+        error: function (error) {
+          if (0 === error.models.length) {
+            defer.resolve([]);
+          }
         }
       });
       

@@ -15,9 +15,15 @@ define([
     defaults: {
       title: '',
       description: '',
-      body: ''
+      body: '',
+      createdAt: '',
+      modifiedAt: ''
     },
-
+    parse: function (data) {
+      data.createdAt = data.createdAt.date;
+      data.modifiedAt = data.modifiedAt.date;
+      return data;
+    },
     validate: function (attrs, options) {
       var errors = {};
       if (!attrs.title) {

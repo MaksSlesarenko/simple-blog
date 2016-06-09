@@ -1,5 +1,7 @@
 <td><%- id %></td>
 <td><%- title %></td>
+<td><%- createdAt %></td>
+<td><%- modifiedAt %></td>
 <td><%- description %></td>
 <td>
     <a href="#posts/<%- id %>" class="btn btn-small js-show">
