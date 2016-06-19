@@ -21,3 +21,7 @@ td {
     overflow: hidden;
     white-space: nowrap;
 }
+
+.editor-toolbar {
+    z-index: 9999!important;
+}

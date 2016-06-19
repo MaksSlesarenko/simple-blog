@@ -1,0 +1,1 @@
+<textarea id="post-body"><%- body %></textarea>

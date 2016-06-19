@@ -13,7 +13,8 @@ require.config({
     'spin': './vendor/spin',
     'spin.jquery': './vendor/spin.jquery',
     'text': './vendor/text',
-    'tpl': './vendor/underscore-tpl'
+    'tpl': './vendor/underscore-tpl',
+    'simplemde': './vendor/simplemde.min'
   },
   shim: {
     'bootstrap': ['jquery'],
@@ -30,6 +31,9 @@ require.config({
     'marionette': {
       deps: ['backbone'],
       exports: 'Marionette'
+    },
+    'simplemde': {
+      exports: 'SimpleMDE'
     },
     'backbone.picky': ['backbone'],
     'backbone.syphon': ['backbone'],

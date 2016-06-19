@@ -27,7 +27,6 @@ define(['management/app', 'management/apps/posts/edit/edit_view'], function (
           $.when(fetchingPost).done(function (post) {
             var view;
             if (post !== undefined) {
-              // view = new EditView.Post({
               view = new Edit.View.Post({
                 model: post
               });

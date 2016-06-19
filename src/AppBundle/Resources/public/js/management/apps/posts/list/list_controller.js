@@ -62,6 +62,7 @@ define(['management/app', 'management/apps/posts/list/list_view'], function (Pos
             postsListView.on('childview:post:edit', function (childView, args) {
               require(['management/apps/posts/edit/edit_view'], function (EditView) {
                 var model = args.model;
+                model.set('isModal', true);
                 var view = new EditView.Post({
                   model: model
                 });
