@@ -8,7 +8,6 @@ DB_NAME='blog'
 DB_USER='root'
 DB_PORT='5432'
 DB_PASSWORD='12345678'
-DB_DRIVER='pdo_pgsql'
 
 echo "Repository update..."
 echo vagrant | sudo -S apt-get update > /dev/null
@@ -61,7 +60,6 @@ sed -i "s@database_port:.*@database_port: $DB_PORT@" $ROOT_DIR/app/config/parame
 sed -i "s@database_name:.*@database_name: $DB_NAME@" $ROOT_DIR/app/config/parameters.yml
 sed -i "s@database_password:.*@database_password: $DB_PASSWORD@" $ROOT_DIR/app/config/parameters.yml
 sed -i "s@database_user:.*@database_user: $DB_USER@" $ROOT_DIR/app/config/parameters.yml
-sed -i "s@pdo_mysql@$DB_DRIVER@" $ROOT_DIR/app/config/config.yml
 
 bin/console doctrine:schema:update --force
 bin/console doctrine:fixtures:load
