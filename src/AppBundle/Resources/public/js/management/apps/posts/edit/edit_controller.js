@@ -42,7 +42,7 @@ define(['management/app', 'management/apps/posts/edit/edit_view'], function (
               view = new PostManager.PostsApp.Show.MissingPost();
             }
             PostManager.regions.main.reset();
-            PostManager.regions.dialog.show(view);
+            PostManager.regions.main.show(view);
           });
         });
       }
