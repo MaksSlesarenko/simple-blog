@@ -26,13 +26,11 @@ class PostController extends Controller
 
         $response = new JsonResponse();
 
-        $submittedData = [
+        $form->submit([
             'title' => $request->request->get('title'),
             'description' => $request->request->get('description'),
-            'body' => $request->request->get('body'),
-        ];
-
-        $form->submit($submittedData);
+            'body' => $request->request->get('body')
+        ]);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -43,9 +41,7 @@ class PostController extends Controller
             $response->setData($post);
         } else {
             $response->setStatusCode(Response::HTTP_BAD_REQUEST);
-            $response->setData([
-                'errors' => (string)$form->getErrors(true)
-            ]);
+            $response->setData(['errors' => (string)$form->getErrors(true)]);
         }
         $response->headers->set('Content-Type', 'application/json');
 
@@ -96,13 +92,11 @@ class PostController extends Controller
 
         $form = $this->createForm(PostType::class, $post);
 
-        $submittedData = [
+        $form->submit([
             'title' => $request->request->get('title'),
             'description' => $request->request->get('description'),
-            'body' => $request->request->get('body'),
-        ];
-
-        $form->submit($submittedData);
+            'body' => $request->request->get('body')
+        ]);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -111,9 +105,7 @@ class PostController extends Controller
             
             $response->setStatusCode(Response::HTTP_NO_CONTENT);
         } else {
-            $response->setData([
-                'errors' => (string) $form->getErrors(true)
-            ]);
+            $response->setData(['errors' => (string) $form->getErrors(true)]);
             $response->setStatusCode(Response::HTTP_BAD_REQUEST);
         }
         $response->headers->set('Content-Type', 'application/json');
