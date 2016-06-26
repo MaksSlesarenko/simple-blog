@@ -26,19 +26,19 @@ td {
     z-index: 9999!important;
 }
 
-form {
+form.login-form {
     width: 38%;
     margin-left: auto;
     margin-right: auto;
 }
 
-input {
+form.login-form>input {
     width: 100%;
     display: block;
     margin-bottom: 3%;
 }
 
-input[type='checkbox'] {
+form.login-form>input[type='checkbox'] {
     float: left;
     width: 5%;
 }
