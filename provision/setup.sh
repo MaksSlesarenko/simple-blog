@@ -63,4 +63,7 @@ sed -i "s@database_user:.*@database_user: $DB_USER@" $ROOT_DIR/app/config/parame
 
 bin/console doctrine:schema:update --force
 bin/console doctrine:fixtures:load
+bin/console fos:user:create admin dj@khaled.com thekeytosuccess
+bin/console fos:user:activate admin
+bin/console fos:user:promote admin ROLE_ADMIN
 bin/console assets:install
