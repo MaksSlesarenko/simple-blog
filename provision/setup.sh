@@ -50,7 +50,7 @@ echo vagrant | sudo -S mv composer.phar /usr/local/bin/composer
 
 echo "Installing composer packages..."
 cd $ROOT_DIR
-composer install > /dev/null
+composer install
 
 
 echo "Configuring symfony"
