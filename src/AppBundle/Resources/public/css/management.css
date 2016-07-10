@@ -26,24 +26,24 @@ td {
     z-index: 9999!important;
 }
 
-form.login-form {
+.fos-user-content form {
     width: 38%;
     margin-left: auto;
     margin-right: auto;
 }
 
-form.login-form>input {
+.fos-user-content input {
     width: 100%;
     display: block;
     margin-bottom: 3%;
 }
 
-form.login-form>input[type='checkbox'] {
+.fos-user-content input[type='checkbox'] {
     float: left;
     width: 5%;
 }
 
-.validation-error {
+.fos-user-content .validation-error {
     margin-left: auto;
     margin-right: auto;
     width: 62%;
