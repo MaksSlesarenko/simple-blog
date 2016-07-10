@@ -21,3 +21,4 @@
 .remote-sync.json
 /.vagrant
 .idea/*
+.DS_Store
