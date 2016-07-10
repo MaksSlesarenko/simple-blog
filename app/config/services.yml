@@ -11,3 +11,13 @@ services:
         class: 'ApiBundle\EventListener\JsonRequestContentListener'
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    app.login:
+        class: 'AppBundle\EventListener\LoginListener'
+        arguments: ['@router', '@security.token_storage', '@security.authorization_checker', '@doctrine']
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
+
+    api.token_authenticator:
+            class: 'ApiBundle\Security\TokenAuthenticator'
+            arguments: ['@doctrine.orm.entity_manager']
