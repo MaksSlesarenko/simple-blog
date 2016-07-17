@@ -10,6 +10,6 @@ Vagrant.configure(2) do |config|
     vb.memory = "1024"
   end
   config.vm.provision "shell", privileged: false do |s|
-    s.path="provision/setup.sh"
+    s.path="setup.sh"
   end
 end

@@ -2,6 +2,8 @@ html {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 100%;
+    min-height: 100%;
+    position: relative;
 }
 
 body {
@@ -12,6 +14,12 @@ body {
     font-family: inherit;
     font-weight: inherit;
     font-size: inherit;
+    margin-bottom: 62px;
+}
+
+a {
+    text-decoration: underline;
+    color: black;
 }
 
 ul {
@@ -30,10 +38,19 @@ ul {
     text-align: center;
 }
 
-.pagination > span.current {
+.pagination>span.current {
     color: lightgrey;
 }
 
 .pagination a {
     text-decoration: none;
+}
+
+footer {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
 }
