@@ -27,6 +27,6 @@ class HerokuEnvironment
         }
 
         $io = $event->getIO();
-        $io->write('CLEARDB_DATABASE_URL=' . getenv('CLEARDB_DATABASE_URL'));
+        $io->write('HEROKU_POSTGRESQL_IVORY_URL=' . getenv('HEROKU_POSTGRESQL_IVORY_URL'));
     }
 }
