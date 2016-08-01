@@ -54,3 +54,7 @@ footer {
     right: 0;
     width: 100%;
 }
+
+footer>a {
+    display: inline-block;
+}

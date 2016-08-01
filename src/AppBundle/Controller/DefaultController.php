@@ -36,6 +36,14 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/about", name="about")
+     */
+    public function aboutAction()
+    {
+        return $this->render('AppBundle:default:about.html.twig');
+    }
+
+    /**
      * @Route("/management", name="management")
      */
     public function managementAction(Request $request)
