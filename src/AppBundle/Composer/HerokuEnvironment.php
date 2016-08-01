@@ -13,17 +13,16 @@ class HerokuEnvironment
      */
     public static function populateEnvironment(Event $event)
     {
-//        $url = getenv('CLEARDB_DATABASE_URL'); // If MySQL is chosen
         $url = getenv('DATABASE_URL');
 
         if ($url) {
             $url = parse_url($url);
-            putenv("SYMFONY__DATABASE_HOST={$url['host']}");
-            putenv("SYMFONY__DATABASE_USER={$url['user']}");
-            putenv("SYMFONY__DATABASE_PASSWORD={$url['pass']}");
+            putenv("DATABASE_HOST={$url['host']}");
+            putenv("DATABASE_USER={$url['user']}");
+            putenv("DATABASE_PASSWORD={$url['pass']}");
 
             $db = substr($url['path'], 1);
-            putenv("SYMFONY__DATABASE_NAME={$db}");
+            putenv("DATABASE_NAME={$db}");
         }
 
         $io = $event->getIO();

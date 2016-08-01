@@ -29,7 +29,7 @@ echo vagrant | sudo -S service php5-fpm restart > /dev/null
 
 echo "Installing nginx..."
 echo vagrant | sudo -S apt-get install -y nginx > /dev/null
-echo vagrant | sudo -S cp $ROOT_DIR/nginx_app.conf /etc/nginx/sites-available/nginx_vhost > /dev/null
+echo vagrant | sudo -S cp $ROOT_DIR/nginx_vhost.conf /etc/nginx/sites-available/nginx_vhost > /dev/null
 echo vagrant | sudo -S ln -s /etc/nginx/sites-available/nginx_vhost /etc/nginx/sites-enabled/
 echo vagrant | sudo -S rm -rf /etc/nginx/sites-available/default
 echo vagrant | sudo -S service nginx restart > /dev/null
