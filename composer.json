@@ -30,7 +30,8 @@
         "knplabs/knp-paginator-bundle": "^2.5",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "ext-intl": "*",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "knplabs/knp-markdown-bundle": "^1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

@@ -21,7 +21,7 @@ echo 'export LC_ALL=en_US.UTF-8' >> ~/.bashrc
 source ~/.bashrc
 
 echo "Installing php5"
-echo vagrant | sudo -S apt-get install php5-cli php5-fpm php5-pgsql -y > /dev/null
+echo vagrant | sudo -S apt-get install php5-cli php5-fpm php5-pgsql php5-intl -y > /dev/null
 echo vagrant | sudo -S sed -i 's@user = www-data@user = vagrant@g' /etc/php5/fpm/pool.d/www.conf
 echo vagrant | sudo -S sed -i 's@group = www-data@group = vagrant@g' /etc/php5/fpm/pool.d/www.conf
 echo vagrant | sudo -S sed -i 's@;date.timezone =@date.timezone = "Europe\/Kiev"@g' /etc/php5/cli/php.ini
