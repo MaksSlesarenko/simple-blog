@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Michelf\Markdown;
 
 class DefaultController extends Controller
 {
@@ -30,8 +31,11 @@ class DefaultController extends Controller
            throw $this->createNotFoundException('No post found for id ' . $id);
         }
 
+        $markdown = Markdown::defaultTransform($post->getBody());
+
         return $this->render('AppBundle:default:show.html.twig', [
-            'post' => $post
+            'post' => $post,
+            'markdown' => $markdown
         ]);
     }
 

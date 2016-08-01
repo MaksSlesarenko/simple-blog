@@ -26,4 +26,4 @@ Vendors
 * [SimpleMDE](https://simplemde.com/)
 * [FOSUserBundle](https://symfony.com/doc/master/bundles/FOSUserBundle/index.html)
 * [KNPPaginatorBundle](http://knplabs.com/en/blog/knp-paginator-reborn)
-* [KNPMarkdownBundle](https://github.com/KnpLabs/KnpMarkdownBundle)
+* [PHP-Markdown](https://github.com/michelf/php-markdown)

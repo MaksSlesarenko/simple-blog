@@ -3,7 +3,7 @@
 {% block body %}
     <div class="post">
         <p><small>{{ post.createdAt.date }}</small></p>
-        <p>{{ post.title }}</p>
-        <p>{{ post.body }}</p>
+        <h1>{{ post.title }}</h1>
+        <p>{{ markdown | raw}}</p>
     </div>
 {% endblock %}
